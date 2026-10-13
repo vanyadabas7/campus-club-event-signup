@@ -6,7 +6,7 @@ participants = []
 try:
   with open("participants.txt", "r") as file:
     saved_event = file.readline().strip()
-    saved_capacity = file.readline().strip()
+    saved_capacity = int(file.readline().strip())
 
     if saved_event == event_name and saved_capacity == capacity:
 
@@ -18,7 +18,7 @@ try:
         else:
           break
 
-      print("Previous responses loaded", (saved_capacity, "participants registered"))
+      print("Previous responses loaded.", len(participants), "participant(s) registered.")
 
     else:
       print("Event not found. Creating a new list.")
@@ -36,6 +36,10 @@ while True:
   print("6. Exit")
   choice = int(input("Choose an option (1-6): "))
 
+  def spaces_remaining():
+    spaces_remaining = capacity - len(participants)
+    print("Spaces remaining:", spaces_remaining)
+
   if choice == 1:
     if len(participants) < capacity:
       name = input("Enter participant name: ")
@@ -43,6 +47,8 @@ while True:
       print("Participant registered!")
     else:
       print("Sorry, the event is full :(")
+
+    spaces_remaining()
 
   elif choice == 2:
     name = input("Enter participant name: ")
@@ -52,6 +58,8 @@ while True:
     else:
       print("Participant not found")
 
+    spaces_remaining()
+
   elif choice == 3:
     print("Participants:")
     number = 1
@@ -59,9 +67,13 @@ while True:
       print(number, ".", name)
       number += 1
 
+    spaces_remaining()
+
   elif choice == 4:
-    spaces_remaining = capacity - len(participants)
-    print("Spaces remaining:", spaces_remaining)
+    if len(participants) == 0:
+      print("No participants registered yet.")
+    else:
+      spaces_remaining()
 
   elif choice == 5:
     with open("participants.txt", "w") as file:
@@ -70,6 +82,8 @@ while True:
       for name in participants:
         file.write(name + "\n")
       print("Data saved successfully!")
+
+    spaces_remaining()
 
   elif choice == 6:
     break
