@@ -5,7 +5,6 @@ This is a beginner-friendly Python project that manages registrations for campus
 
 ## Features
 - Register participants
-- Prevent duplicate registrations
 - Remove participants
 - Display all registered participants
 - Check remaining spaces
